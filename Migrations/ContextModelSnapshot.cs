@@ -25,6 +25,7 @@ namespace Parcial1.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("BookId");

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Parcial1.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230213230210_Initial")]
+    [Migration("20230213234114_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -28,6 +28,7 @@ namespace Parcial1.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("BookId");
