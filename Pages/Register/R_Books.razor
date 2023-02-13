@@ -1,12 +1,28 @@
 ﻿@page "/Books"
 
+@inject BooksBLL BooksBLL
+
+
 @code {
+
     [Parameter]
     public Books Book { get; set; } = new Books();
 
+    void New()
+    {
+        Book = new Books();
+    }
     void Save()
     {
-        
+        if(BooksBLL.Save(Book))
+            New();
+    }
+
+    void Search()
+    {
+        var bookFound = BooksBLL.Search(Book.BookId);
+        if(bookFound != null)
+            Book = bookFound;
     }
 }
 
@@ -24,7 +40,7 @@
     }
 
 </style>
-<EditForm Model="Book" OnValidSubmit="Save">
+<EditForm Model="Book" OnInvalidSubmit="Save">
     <div class="card">
         <div class="card-header">
             <h3>Registro de libros</h3>
@@ -34,19 +50,19 @@
             <label class="form-label">Libro Id</label>
 
             <div id="search-div">
-                <input type="number" class="form-control"/>
-                <button class="btn btn-info">Buscar</button>
+                <InputNumber @bind-Value="Book.BookId" class="form-control"/>
+                <button class="btn btn-info" @onclick="Search">Buscar</button>
             </div>
             <label class="form-label">Title</label>
-            <input type="text" class="form-control"/>
+            <InputText @bind-Value="Book.Title" class="form-control"/>
 
             <label class="form-label">Precio</label>
-            <input type="number" class="form-control"/>
+            <InputNumber @bind-Value="Book.Price" class="form-control"/>
         </div>
 
         <div class="card-footer">
-            <button class="btn btn-primary">Nuevo</button>
-            <button class="btn btn-success">Guardar</button>
+            <button class="btn btn-primary" @onclick="New">Nuevo</button>
+            <button class="btn btn-success" @onclick="Save">Guardar</button>
             <button class="btn btn-danger">Eliminar</button>
         </div>
     </div>
