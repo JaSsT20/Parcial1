@@ -28,7 +28,7 @@ public class BooksBLL
 
     public bool Save(Books Book)
     {
-        if(Exist(Book.BookId))
+        if(!Exist(Book.BookId))
             return Insert(Book);
         else
             return Modify(Book);
