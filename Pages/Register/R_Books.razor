@@ -1,7 +1,13 @@
 ﻿@page "/Books"
 
 @code {
+    [Parameter]
+    public Books Book { get; set; } = new Books();
 
+    void Save()
+    {
+        
+    }
 }
 
 <style>
@@ -18,7 +24,7 @@
     }
 
 </style>
-<EditForm>
+<EditForm Model="Book" OnValidSubmit="Save">
     <div class="card">
         <div class="card-header">
             <h3>Registro de libros</h3>
