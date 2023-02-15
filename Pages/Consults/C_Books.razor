@@ -1,0 +1,36 @@
+@page "/Consults"
+
+@inject BooksBLL BooksBLL
+
+@code{
+
+    public List<Books> BooksList = new List<Books>();
+
+        protected override void OnInitialized()
+        {
+            BooksList = BooksBLL.GetList(product => true);
+        }
+
+}
+
+<table class="table">
+    <tHead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Precio</th>
+        </tr>
+    </tHead>
+    <tbody>
+        @foreach (var book in BooksList)
+        {
+            <tr>
+                <td>@book.BookId</td>
+                <td>@book.Title</td>
+                <td>@book.Price</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
