@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 public class BooksBLL
 {
@@ -43,6 +44,11 @@ public class BooksBLL
     public Books? Search(int BookId)
     {
         return context.Book.Where(book => book.BookId == BookId).AsNoTracking().SingleOrDefault();
+    }
+
+    public List<Books> GetList(Expression<Func<Books, bool>> criterion)
+    {
+        return context.Book.AsNoTracking().Where(criterion).ToList();
     }
 
 }
