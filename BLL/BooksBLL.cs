@@ -34,6 +34,12 @@ public class BooksBLL
             return Modify(Book);
     }
 
+    public bool Delete(Books Book)
+    {
+        context.Entry(Book).State = EntityState.Deleted;
+        return context.SaveChanges() > 0;
+    }
+
     public Books? Search(int BookId)
     {
         return context.Book.Where(book => book.BookId == BookId).AsNoTracking().SingleOrDefault();
